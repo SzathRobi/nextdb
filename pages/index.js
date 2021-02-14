@@ -3,9 +3,9 @@ import { connectToDatabase } from '../util/mongodb'
 import styles from '../styles/Home.module.css'
 
 export async function getServerSideProps(context) {
-  const { db } = await connectToDatabase()
+  const { client } = await connectToDatabase()
 
-  const isConnected = await db.isConnected()
+  const isConnected = await client.isConnected()
 
   return {
     props: { isConnected },
