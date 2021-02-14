@@ -12,7 +12,7 @@ export async function getServerSideProps(context) {
   }
 }
 
-export default function Home() {
+export default function Home({isConnected}) {
   return (
     <div className={styles.container}>
       <Head>
@@ -24,7 +24,14 @@ export default function Home() {
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
-
+        {isConnected ? (
+          <h2 className="subtitle">You are connected to MongoDB</h2>
+        ) : (
+          <h2 className="subtitle">
+            You are NOT connected to MongoDB. Check the <code>README.md</code>{' '}
+            for instructions.
+          </h2>
+        )}
       </main>
 
       <footer className={styles.footer}>
