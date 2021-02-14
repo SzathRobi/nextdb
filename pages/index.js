@@ -3,16 +3,27 @@ import { connectToDatabase } from '../util/mongodb'
 import styles from '../styles/Home.module.css'
 
 export async function getServerSideProps(context) {
+  //this const must be client
   const { client } = await connectToDatabase()
 
   const isConnected = await client.isConnected()
 
+  const movies = await client
+  .collection("movies")
+  .find({})
+  .sort({ metacritic: -1 })
+  .limit(20)
+  .toArray();
+
   return {
-    props: { isConnected },
-  }
+    props: {
+      movies: JSON.parse(JSON.stringify(movies)),
+    },
+  };
 }
 
-export default function Home({isConnected}) {
+export default function Home({movies}) {
+  console.log(movies)
   return (
     <div className={styles.container}>
       <Head>
