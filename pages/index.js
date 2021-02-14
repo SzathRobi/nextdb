@@ -17,7 +17,7 @@ export async function getStaticProps() {
   };
 }
 export default function Home({movies}) {
-  console.log(movies)
+  
   return (
     <div className={styles.container}>
       <Head>
@@ -29,14 +29,15 @@ export default function Home({movies}) {
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
-        {/*isConnected ? (
-          <h2 className="subtitle">You are connected to MongoDB</h2>
-        ) : (
-          <h2 className="subtitle">
-            You are NOT connected to MongoDB. Check the <code>README.md</code>{' '}
-            for instructions.
-          </h2>
-        )*/}
+        <ul>
+        {movies.map((movie) => (
+          <li key={movie._id}>
+            <h2>{movie.title}</h2>
+            <h3>{movie.metacritic}</h3>
+            <p>{movie.plot}</p>
+          </li>
+        ))}
+      </ul>
       </main>
 
       <footer className={styles.footer}>
